@@ -20,9 +20,8 @@ model Course {
 }
 
 model Student {
-  id   String @id @default(uuid())
-  name String
-
+  id             String           @id @default(uuid())
+  name           String
   CourseStudents CourseStudents[]
 
   @@map("students")

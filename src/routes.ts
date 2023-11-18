@@ -5,15 +5,16 @@ import { CourseStudentController } from './controllers/CourseStudentController';
 
 const router = Router();
 
-const courseController = new CourseController();
-const studentController = new StudentController();
-const courseStudentController = new CourseStudentController();
+router.get('/course', CourseController.get);
+router.post('/course', CourseController.create);
+router.delete('/course/:id', CourseController.delete);
 
-router.post('/course', courseController.create);
-router.delete('/course/:id', courseController.delete);
-router.post('/student', studentController.create);
-router.delete('/student', studentController.delete);
-router.post('/course-student', courseStudentController.create);
-router.delete('/course-student', courseStudentController.delete);
+router.get('/student', StudentController.get);
+router.post('/student', StudentController.create);
+router.delete('/student/:id', StudentController.delete);
+
+router.get('/course-student', CourseStudentController.get);
+router.post('/course-student', CourseStudentController.create);
+router.delete('/course-student/:id', CourseStudentController.delete);
 
 export default router;

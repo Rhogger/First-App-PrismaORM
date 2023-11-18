@@ -2,7 +2,12 @@ import { Request, Response } from 'express';
 import prismaClient from '../database/prismaClient';
 
 export class StudentController {
-  async create(request: Request, response: Response) {
+  static async get(request: Request, response: Response) {
+    const student = await prismaClient.student.findMany();
+    return response.json(student);
+  }
+
+  static async create(request: Request, response: Response) {
     const { name } = request.body;
 
     const student = await prismaClient.student.create({
@@ -13,12 +18,13 @@ export class StudentController {
     return response.json(student);
   }
 
-  async delete(request: Request, response: Response) {
+  static async delete(request: Request, response: Response) {
     const { id } = request.params;
 
-    const student = await prismaClient.student.delete({
+    await prismaClient.student.delete({
       where: { id },
     });
-    return response.json(student);
+
+    return response.json({ deleted: true });
   }
 }
